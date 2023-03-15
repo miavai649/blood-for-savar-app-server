@@ -48,6 +48,15 @@ async function run() {
             res.send(result)
         })
 
+        app.patch('/update/:id', async (req, res) => {
+            const id = req.params.id;
+            const o_id = new ObjectId(id);
+            const filter = { _id: o_id };
+            const updatedDoc = { $set: req.body };
+            const result = await donorListCollection.updateOne(filter, updatedDoc);
+            res.send(result);
+        })
+
     }
     finally {
         
